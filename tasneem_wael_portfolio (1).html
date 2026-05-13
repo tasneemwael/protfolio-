@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasneem Wael — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:        #0F6E56;
+    --teal-light:  #E1F5EE;
+    --blue:        #185FA5;
+    --blue-light:  #E6F1FB;
+    --purple:      #534AB7;
+    --purple-light:#EEEDFE;
+    --amber:       #854F0B;
+    --amber-light: #FAEEDA;
+    --green:       #3B6D11;
+    --green-light: #EAF3DE;
+    --accent:      #1D9E75;
+    --text:        #1A1A1A;
+    --muted:       #6B6A65;
+    --hint:        #9B9A95;
+    --border:      #DDDBD2;
+    --surface:     #F4F3EF;
+    --bg:          #FAFAF8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Layout ── */
+  .wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--hint);
+    margin-bottom: 14px;
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 7vw, 64px);
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-bio {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 24px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: white;
+    font-weight: 400;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--hint);
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  /* ── Grid ── */
+  .grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px 18px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--teal));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: #bbb;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+
+  .card:hover::before { transform: scaleX(1); }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .card-title-block { flex: 1; }
+
+  .card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+
+  .card-category {
+    font-size: 11px;
+    color: var(--hint);
+    letter-spacing: 0.02em;
+  }
+
+  .role-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 11px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 16px;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .gh-url {
+    font-size: 11px;
+    color: var(--hint);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .gh-url svg { opacity: 0.5; }
+
+  .contrib {
+    font-size: 11px;
+    color: var(--hint);
+    font-style: italic;
+  }
+
+  /* ── Stats ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 40px;
+    animation: fadeUp 0.5s 0.4s ease both;
+  }
+
+  .stat {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--hint);
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.15s; }
+  .card:nth-child(2) { animation-delay: 0.20s; }
+  .card:nth-child(3) { animation-delay: 0.25s; }
+  .card:nth-child(4) { animation-delay: 0.30s; }
+  .card:nth-child(5) { animation-delay: 0.35s; }
+  .card:nth-child(6) { animation-delay: 0.40s; }
+
+  /* ── Responsive ── */
+  @media (max-width: 520px) {
+    .wrapper { padding: 36px 20px 60px; }
+    .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .stat-num { font-size: 24px; }
+    .card-top { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Hero -->
+  <header class="hero">
+    <p class="hero-label">Portfolio</p>
+    <h1 class="hero-name">Tasneem <em>Wael</em></h1>
+    <p class="hero-bio">Software engineer &amp; team lead — building across mobile, machine learning, EdTech, and systems optimization.</p>
+    <div class="tags">
+      <span class="tag">Flutter</span>
+      <span class="tag">Python</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">HTML / CSS / JS</span>
+      <span class="tag">EdTech</span>
+      <span class="tag">Dart</span>
+    </div>
+  </header>
+
+  <!-- Projects -->
+  <p class="section-label">Projects &amp; Contributions</p>
+
+  <div class="grid">
+
+    <!-- 3allam -->
+    <a class="card" href="https://github.com/3allamEduction/3allam-version1" target="_blank"
+       style="--card-accent: var(--teal)">
+      <div class="card-top">
+        <div class="card-title-block">
+          <div class="card-icon" style="background:var(--teal-light)">🎓</div>
+          <div class="card-title">3allam — Tech Education Platform</div>
+          <div class="card-category">EdTech · Web Platform</div>
+        </div>
+        <span class="role-badge" style="background:var(--teal-light);color:var(--teal)">Team Lead</span>
+      </div>
+      <p class="card-desc">A technology education platform for learners. Led the team and served as the integration lead — bringing together all parts of the project and assembling the full product into a unified, working platform.</p>
+      <div class="chips">
+        <span class="chip">EdTech</span>
+        <span class="chip">Web Platform</span>
+        <span class="chip">Team Leadership</span>
+      </div>
+      <div class="card-footer">
+        <span class="gh-url">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          3allamEduction/3allam-version1
+        </span>
+        <span class="contrib">Project integrator</span>
+      </div>
+    </a>
+
+    <!-- SA-Project -->
+    <a class="card" href="https://github.com/tasneemwael/SA-Project" target="_blank"
+       style="--card-accent: var(--blue)">
+      <div class="card-top">
+        <div class="card-title-block">
+          <div class="card-icon" style="background:var(--blue-light)">🌐</div>
+          <div class="card-title">SA-Project — Web Application</div>
+          <div class="card-category">Frontend · Web Development</div>
+        </div>
+        <span class="role-badge" style="background:var(--blue-light);color:var(--blue)">Main Developer</span>
+      </div>
+      <p class="card-desc">A multi-page web application built from scratch. Responsible for the full structure, styling, and interactivity — assembling and owning the entire codebase solo.</p>
+      <div class="chips">
+        <span class="chip">HTML</span>
+        <span class="chip">CSS</span>
+        <span class="chip">JavaScript</span>
+      </div>
+      <div class="card-footer">
+        <span class="gh-url">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          tasneemwael/SA-Project
+        </span>
+        <span class="contrib">Sole developer</span>
+      </div>
+    </a>
+
+    <!-- Face Attendance -->
+    <a class="card" href="https://github.com/BassantHady/face-attendance-system" target="_blank"
+       style="--card-accent: var(--amber)">
+      <div class="card-top">
+        <div class="card-title-block">
+          <div class="card-icon" style="background:var(--amber-light)">🪪</div>
+          <div class="card-title">Face Attendance System</div>
+          <div class="card-category">Computer Vision · Biometrics</div>
+        </div>
+        <span class="role-badge" style="background:var(--amber-light);color:var(--amber)">Integrator &amp; GUI</span>
+      </div>
+      <p class="card-desc">An automated attendance system using facial recognition. Built the graphical user interface and acted as the integration lead — bringing together the recognition models and the application layer into a working system.</p>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">OpenCV</span>
+        <span class="chip">Face Recognition</span>
+        <span class="chip">GUI</span>
+      </div>
+      <div class="card-footer">
+        <span class="gh-url">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          BassantHady/face-attendance-system
+        </span>
+        <span class="contrib">Integration &amp; GUI</span>
+      </div>
+    </a>
+
+    <!-- ML Project -->
+    <a class="card" href="https://github.com/HamzaElkotp/College-ML-project" target="_blank"
+       style="--card-accent: var(--green)">
+      <div class="card-top">
+        <div class="card-title-block">
+          <div class="card-icon" style="background:var(--green-light)">🤖</div>
+          <div class="card-title">College ML Project</div>
+          <div class="card-category">Machine Learning · Data Science</div>
+        </div>
+        <span class="role-badge" style="background:var(--green-light);color:var(--green)">ML Developer</span>
+      </div>
+      <p class="card-desc">A machine learning project covering two domains — student performance prediction on numerical data and image-based classification. Developed the image dataset ML pipeline and model.</p>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">Jupyter Notebook</span>
+        <span class="chip">Scikit-learn</span>
+        <span class="chip">Image Classification</span>
+        <span class="chip">Pandas</span>
+      </div>
+      <div class="card-footer">
+        <span class="gh-url">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          HamzaElkotp/College-ML-project
+        </span>
+        <span class="contrib">Image ML developer</span>
+      </div>
+    </a>
+
+    <!-- Finove -->
+    <a class="card" href="https://github.com/yasmineahmed11/Finove_flutter" target="_blank"
+       style="--card-accent: var(--teal)">
+      <div class="card-top">
+        <div class="card-title-block">
+          <div class="card-icon" style="background:var(--teal-light)">📱</div>
+          <div class="card-title">Finove — Finance Mobile App</div>
+          <div class="card-category">Mobile · FinTech · Flutter</div>
+        </div>
+        <span class="role-badge" style="background:var(--teal-light);color:var(--teal)">Flutter Team Lead</span>
+      </div>
+      <p class="card-desc">A Flutter-based personal finance mobile application. Led the Flutter development team, architecting the app structure and guiding the team through feature implementation and delivery.</p>
+      <div class="chips">
+        <span class="chip">Flutter</span>
+        <span class="chip">Dart</span>
+        <span class="chip">Mobile Dev</span>
+        <span class="chip">FinTech</span>
+      </div>
+      <div class="card-footer">
+        <span class="gh-url">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          yasmineahmed11/Finove_flutter
+        </span>
+        <span class="contrib">Flutter team lead</span>
+      </div>
+    </a>
+
+    <!-- Traffic -->
+    <a class="card" href="https://github.com/RawanHossam17/traffic-signal-optimization" target="_blank"
+       style="--card-accent: var(--purple)">
+      <div class="card-top">
+        <div class="card-title-block">
+          <div class="card-icon" style="background:var(--purple-light)">🚦</div>
+          <div class="card-title">Traffic Signal Optimization</div>
+          <div class="card-category">AI · Optimization · Simulation</div>
+        </div>
+        <span class="role-badge" style="background:var(--purple-light);color:var(--purple)">GUI Developer</span>
+      </div>
+      <p class="card-desc">Applies Particle Swarm Optimization (PSO) and a Hybrid PSO-GA algorithm to optimize traffic signal timings across multiple intersections. Built the interactive GUI using Streamlit and Pygame for visualizing simulation results.</p>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">PSO</span>
+        <span class="chip">Genetic Algorithm</span>
+        <span class="chip">Streamlit</span>
+        <span class="chip">Pygame</span>
+      </div>
+      <div class="card-footer">
+        <span class="gh-url">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          RawanHossam17/traffic-signal-optimization
+        </span>
+        <span class="contrib">GUI developer</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-lbl">Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-lbl">Team lead roles</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8+</div>
+      <div class="stat-lbl">Technologies</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
